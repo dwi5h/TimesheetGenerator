@@ -2,6 +2,7 @@ import pdfplumber
 import openpyxl
 from openpyxl.styles import PatternFill
 from helper import *
+from tkinter import *
 
 # pdf_file = "ts-des24.pdf"
 # excel_file = "ts-des24 - Copy.xlsx"
@@ -10,7 +11,7 @@ from helper import *
 # workbook = openpyxl.load_workbook(excel_file)
 # sheet = workbook.active
 
-def writeValue(start_row_excel, pdf_file, excel_file):
+def writeValue(start_row_excel, pdf_file, excel_file, button):
     try:
         workbook = openpyxl.load_workbook(excel_file)
         sheet = workbook.active
@@ -49,10 +50,14 @@ def writeValue(start_row_excel, pdf_file, excel_file):
                     start_row_excel += 1
 
         workbook.save(excel_file)
+        button.config(state="enable")
         print(f"Data has been successfully written to {excel_file}")
+        return "successfully"
 
     except Exception as e:
+        button.config(state="enable")
         print(f"An error occurred: {e}")
+        return f"An error occurred: {e}"
 
 
 # writeValue(start_row_excel)
