@@ -47,6 +47,10 @@ def write_value():
         
 # stop = False
 # th = Thread(target = Convert)
+
+btnGenerate = ttk.Button(frm, text="GENERATE", command=start_writting)
+btnGenerate.grid(column=1, columnspan=2, row=100)
+
 def entry_point():
     frm.grid()
 
@@ -69,8 +73,8 @@ def entry_point():
     labelStatus = ttk.Label(frm, textvariable=status)
     labelStatus.grid(column=1, columnspan=2, row=99, pady=(50, 5))
 
-    btnGenerate = ttk.Button(frm, text="GENERATE", command=start_writting)
-    btnGenerate.grid(column=1, columnspan=2, row=100)
+    # btnGenerate = ttk.Button(frm, text="GENERATE", command=start_writting)
+    # btnGenerate.grid(column=1, columnspan=2, row=100)
 
     # btnStop = ttk.Button(frm, text="Stop", command=StopConvert)
     # btnStop.grid(column=2, row=100)
