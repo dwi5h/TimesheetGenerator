@@ -1,18 +1,8 @@
-# from asyncio import subprocess
-# from operator import truediv
-# from pydoc import Helper
-from re import I
 from threading import Thread
 from tkinter import *
 from tkinter import ttk
 from tkinter import filedialog
 from service import writeValue
-# import os
-# import subprocess
-# from subprocess import Popen, PIPE
-# from threading import Thread
-# import helper
-# import time
 
 root = Tk()
 root.title("TTIMESHEET GENERATOR")
