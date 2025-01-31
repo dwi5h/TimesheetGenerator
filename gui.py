@@ -5,7 +5,7 @@ from tkinter import filedialog
 from service import writeValue
 
 root = Tk()
-root.title("TTIMESHEET GENERATOR")
+root.title("TIMESHEET GENERATOR")
 root.iconbitmap("engineering.ico")
 frm = ttk.Frame(root, padding=50)
 status = StringVar()
@@ -42,9 +42,6 @@ def start_writting():
     
 def write_value():
     status.set(writeValue(13, pdf_file_path.get(), excel_file_path.get(), btnGenerate))
-        
-# stop = False
-# th = Thread(target = Convert)
 
 btnGenerate = ttk.Button(frm, text="GENERATE", command=start_writting)
 btnGenerate.grid(column=1, columnspan=2, row=100)
@@ -64,12 +61,5 @@ def entry_point():
     
     labelStatus = ttk.Label(frm, textvariable=status)
     labelStatus.grid(column=1, columnspan=2, row=99, pady=(50, 5))
-
-    # btnGenerate = ttk.Button(frm, text="GENERATE", command=start_writting)
-    # btnGenerate.grid(column=1, columnspan=2, row=100)
-
-    # btnStop = ttk.Button(frm, text="Stop", command=StopConvert)
-    # btnStop.grid(column=2, row=100)
-    # helper.SwitchButton(btnStop, "disabled")
 
     root.mainloop()
