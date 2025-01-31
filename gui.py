@@ -9,9 +9,12 @@ root.title("TTIMESHEET GENERATOR")
 root.iconbitmap("engineering.ico")
 frm = ttk.Frame(root, padding=50)
 status = StringVar()
+excel_file_path = StringVar()
+excel_file_path.set("Pilih file .excel")
+pdf_file_path = StringVar()
+pdf_file_path.set("Pilih file .pdf")
 
 def browse_button_pdf():
-    global pdf_file_path
     filename = filedialog.askopenfilename()
     if filename == "":
         pdf_file_path.set("Pilih file .pdf")
@@ -19,7 +22,6 @@ def browse_button_pdf():
         pdf_file_path.set(filename)
 
 def browse_button_excel():
-    global excel_file_path
     filename = filedialog.askopenfilename()
     if filename == "":
         excel_file_path.set("Pilih file .excel")
@@ -28,9 +30,15 @@ def browse_button_excel():
         
 
 def start_writting():
-    btnGenerate.config(state="disabled")
-    th = Thread(target = write_value)
-    th.start()
+    if pdf_file_path.get() == "Pilih file .pdf" or not pdf_file_path:
+        status.set("file pdf belum dipilih!")
+    elif excel_file_path.get() == "Pilih file .excel" or not excel_file_path:
+        status.set("file excel belum dipilih!")
+    else:
+        btnGenerate.config(state="disabled")
+        status.set("processing...")
+        th = Thread(target = write_value)
+        th.start()
     
 def write_value():
     status.set(writeValue(13, pdf_file_path.get(), excel_file_path.get(), btnGenerate))
@@ -44,12 +52,6 @@ btnGenerate.grid(column=1, columnspan=2, row=100)
 def entry_point():
     frm.grid()
 
-    pdf_file_path = StringVar()
-    pdf_file_path.set("Pilih file .pdf")
-
-    excel_file_path = StringVar()
-    excel_file_path.set("Pilih file .excel")
-
     ttk.Label(frm, text="== TTIMESHEET GENERATOR ==").grid(column=1, columnspan=2, row=10, pady=(0, 25))
 
     ttk.Label(frm, textvariable=excel_file_path).grid(column=1, row=50)
@@ -59,7 +61,7 @@ def entry_point():
     ttk.Label(frm, textvariable=pdf_file_path).grid(column=1, row=51)
     btnBrowsePdf = ttk.Button(frm, text="Browse Pdf..", command=browse_button_pdf)
     btnBrowsePdf.grid(column=2, row=51)
-
+    
     labelStatus = ttk.Label(frm, textvariable=status)
     labelStatus.grid(column=1, columnspan=2, row=99, pady=(50, 5))
 
